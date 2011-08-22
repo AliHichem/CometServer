@@ -20,6 +20,7 @@ by many web hosting service.
 Requirements
 -----------
 
+ * Operating system: Unix-like
  * php version 5.0 or higher  
  * php libraries : posix, pcntl, xml
  * php command language interface 
