@@ -1,0 +1,94 @@
+#!/usr/bin/php -q
+<?php
+/**
+ * Comet
+ *
+ * @package     CometServer
+ * @version     $Revision$
+ * @author      Ali hichem <ali.hichem@mail.com>
+ */
+
+require_once "lib/CometAutoloader.class.php";
+
+$options = array("args" => $argv);
+$cliHandler = new CometArgumentHandler($options);
+$cometServer = CometServer::create();
+$cmd = $cliHandler->getCommand();
+switch ($cmd['command'])
+{
+    case HELP:
+        $cliHandler->throwMessage($cliHandler->getHelp());
+        break;
+    case START:
+        if ($cometServer->isRunning())
+        {
+            $cliHandler->throwMessage("Server already running pid({$cometServer->getServerPid()})");
+        }
+        else
+        {
+            $cliHandler->throwMessage("Starting server ... [", FALSE);
+            $cometServer->start();
+        }
+        break;
+    case STOP:
+        if ($cometServer->isRunning())
+        {
+            $cliHandler->throwMessage("Stopping server pid({$cometServer->getServerPid()}) ..", FALSE);
+            $result = trim($cometServer->stop());
+            if ($result == 'ok')
+            {
+                echo "[" . CometCliColor::format('OK', 'INFO') . "]\n";
+            }
+            else
+            {
+                echo "[" . CometCliColor::format('KO', 'ERROR') . "]\n";
+            }
+        }
+        else
+        {
+            $cliHandler->throwMessage("Server already stopped ");
+        }
+        break;
+    case STATUS:
+        if ($cometServer->isRunning())
+        {
+            $cliHandler->throwMessage("Server is running pid({$cometServer->getServerPid()})");
+        }
+        else
+        {
+            $cliHandler->throwMessage("Server is not running");
+        }
+        break;
+    case WRITE:
+        if ($cometServer->isRunning())
+        {
+            $cometServer->write($cmd['key'], $cmd['value']);
+        }
+        else
+        {
+            $cliHandler->throwMessage("Server is not running");
+        }
+        break;
+    case READ:
+        if ($cometServer->isRunning())
+        {
+            $value = $cometServer->read($cmd['key']);
+            $cliHandler->printMessage("value: {$value}", TRUE);
+        }
+        else
+        {
+            $cliHandler->throwMessage("Server is not running");
+        }
+        break;
+    case DUMP:
+        if ($cometServer->isRunning())
+        {
+            $value = $cometServer->dump();
+            $cliHandler->throwMessage($value);
+        }
+        else
+        {
+            $cliHandler->throwMessage("Server is not running");
+        }
+        break;
+}
