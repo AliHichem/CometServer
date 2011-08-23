@@ -23,7 +23,7 @@ and "write.php".
 Usage
 -----
 
-Assuming that you place "jGrow.notifier" under the root http folder, you will visit the index page with:
+Assuming that you place "jGrowl.notifier" under the root http folder, you will visit the index page with:
 
     http://localhost/jGrowl.notifier/
 
