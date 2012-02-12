@@ -1,20 +1,23 @@
 <?php
 
+namespace Comet\Web;
+
+use Comet\Util\Tools;
+
 /**
- * CometWebInterface
+ * CInterface
  *
  * @package     CometServer
  * @version     $Revision$
  * @author      Ali hichem <ali.hichem@mail.com>
  */
-class CometWebInterface
+class CInterface
 {
 
     private $runTimeLimit;
     private $cometSrv;
     private $defaultOptions = array(
-        'runTimeLimit' => 0,
-        'cometSrv' => COMET_LOCATION
+        'runTimeLimit'  => 0,
     );
     private $key;
     private $timeKey;
@@ -23,10 +26,10 @@ class CometWebInterface
      * Class constructor
      *
      * @param <type> $options
-     * @return void
      */
     public function __construct(array $options = array(), $key = NULL)
     {
+        $this->defaultOptions['cometSrv'] = ROOT_COMET.'/Comet';
         $this->initOptions($options);
         $this->initMaxExecutionTime();
         $this->key = $key;
@@ -68,7 +71,7 @@ class CometWebInterface
             }
             elseif ($type == 'array')
             {
-                if (CometTools::isAssoc($key))
+                if (Tools::isAssoc($key))
                 {
                     throw new Exception('Key cannot be associative array');
                 }
@@ -114,7 +117,7 @@ class CometWebInterface
      */
     private function initOptions($options)
     {
-        $options = CometTools::arrayDeepMerge($this->defaultOptions, $options);
+        $options = Tools::arrayDeepMerge($this->defaultOptions, $options);
         $privates = array_keys($options);
         foreach ($privates as $key)
         {
@@ -177,7 +180,7 @@ class CometWebInterface
         header ("Content-Type: text/xml");
         $cometData = $this->read($this->key);
         $cometTime = trim(str_replace("value:", "", $this->readFromComet($this->getTimeKey())));
-        $doc = new DOMDocument('1.0','utf-8');
+        $doc = new \DOMDocument('1.0','utf-8');
         $doc->formatOutput = true;
 
         $root = $doc->createElement('comet');

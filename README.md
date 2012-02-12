@@ -1,4 +1,4 @@
-CometServer: allows a web server to push data to a browser
+CometServer V2: allows a web server to push data to a browser
 ==========================================================
 
 Comet application (also known as "Push server") written in php, using Ajax with the [long polling](http://en.wikipedia.org/wiki/Push_technology#Long_polling) technology 
@@ -21,10 +21,10 @@ Requirements
 -----------
 
  * Operating system: Unix-like
- * php version 5.0 or higher  
+ * php version 5.3 or higher  
  * php libraries : posix, pcntl, xml
  * php command language interface 
- * jQuery FW if you will use the native Comet helper "CometWebJsHelper.class.php".
+ * jQuery FW if you will use the native Comet helper "Comet\Web\JsHelper.php".
 
 Installation
 -----------
@@ -54,7 +54,7 @@ start server
 depending on what you want to do with your CometServer, you may have to include CometServer classes to your 
 web project:
 
-    <?php require_once "path_to_lib_folder_of_cometserver/lib/CometAutoloader.class.php"; ?>
+    <?php require_once "path_to_lib_folder_of_cometserver/config/bootstrap.php"; ?>
 
 Exemples
 -------

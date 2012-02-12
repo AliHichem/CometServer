@@ -1,13 +1,15 @@
 <?php
 
+namespace Comet\Util ;
+
 /**
- * CometTools
+ * Tools
  *
  * @package     CometServer
  * @version     $Revision$
  * @author      Ali hichem <ali.hichem@mail.com>
  */
-class CometTools
+class Tools
 {
 
     // Code from symfony sfToolkit class. See LICENSE
@@ -80,7 +82,7 @@ class CometTools
                 $args[1] = self::arrayDeepMerge($args[0], $args[1]);
                 array_shift($args);
 
-                return call_user_func_array(array('CometTools', 'arrayDeepMerge'), $args);
+                return call_user_func_array(array('Tools', 'arrayDeepMerge'), $args);
                 break;
         }
     }

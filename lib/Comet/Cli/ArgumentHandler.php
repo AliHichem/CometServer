@@ -1,13 +1,18 @@
 <?php
 
+namespace Comet\Cli;
+
+use Comet\Util\Tools,
+    Comet\Cli\Color;
+
 /**
- * CometArgumentHandler
+ * ArgumentHandler
  *
  * @package     CometServer
  * @version     $Revision$
  * @author      Ali hichem <ali.hichem@mail.com>
  */
-class CometArgumentHandler
+class ArgumentHandler
 {
 
     private $err = array();
@@ -19,7 +24,7 @@ class CometArgumentHandler
     private $serverName = NULL;
     private $defaultOptions = array(
         "args" => array(),
-        "serverName" => "CometServer V 0.0.1"
+        "serverName" => "CometServer V2.0"
     );
 
     /**
@@ -45,7 +50,7 @@ class CometArgumentHandler
      */
     public function initOptions($options)
     {
-        $options = CometTools::arrayDeepMerge($this->defaultOptions, $options);
+        $options = Tools::arrayDeepMerge($this->defaultOptions, $options);
         $privates = array_keys($options);
         foreach ($privates as $key)
         {
@@ -154,7 +159,7 @@ class CometArgumentHandler
      */
     public function throwMessage($msg, $exit = TRUE)
     {
-        echo CometCliColor::format($this->serverName, 'COMMENT');
+        echo Color::format($this->serverName, 'COMMENT');
         echo "\n {$msg}";
         if ($exit)
         {

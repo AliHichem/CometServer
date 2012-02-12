@@ -1,5 +1,6 @@
 #!/usr/bin/php -q
 <?php
+
 /**
  * Comet
  *
@@ -8,10 +9,15 @@
  * @author      Ali hichem <ali.hichem@mail.com>
  */
 
-require_once "lib/CometAutoloader.class.php";
+require_once "config/bootstrap.php";
+
+use Comet\Cli\ArgumentHandler,
+    Comet\Internal\Server as CometServer,
+    Comet\Cli\Color as CometCliColor
+    ;
 
 $options = array("args" => $argv);
-$cliHandler = new CometArgumentHandler($options);
+$cliHandler = new ArgumentHandler($options);
 $cometServer = CometServer::create();
 $cmd = $cliHandler->getCommand();
 switch ($cmd['command'])

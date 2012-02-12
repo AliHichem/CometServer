@@ -1,4 +1,10 @@
-<?php require_once "../../lib/CometAutoloader.class.php"; ?>
+<?php 
+
+require_once "../../config/bootstrap.php"; 
+
+use Comet\Web\JsHelper as CometWebJsHelper;
+
+?>
 <html>
     <head>
         <title>CometServer - example:  jGrowl notifier</title>

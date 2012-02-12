@@ -1,18 +1,22 @@
 <?php
 
+namespace Comet\Internal;
+
+use Comet\Cli\Color as CometCliColor;
+
 /**
- * CometServer
+ * Server
  *
  * @package     CometServer
  * @version     $Revision$
  * @author      Ali hichem <ali.hichem@mail.com>
  */
-class CometServer
+class Server
 {
 
     private static $instance = NULL;
     private $serverName = "CometServer";
-    private $serverVersion = "0.0.1";
+    private $serverVersion = "2.0";
     private $socketAddress = '/tmp/mysock';
     private $socketPort = 0;
     private $socketServer = NULL;
@@ -91,17 +95,17 @@ class CometServer
      */
     private function initDaemon()
     {
-        System_Daemon::setOption("appName", "comet");
-        $appName = System_Daemon::getOption("appName");
-        System_Daemon::setOption("appDir", APP_LOCATION);
-        System_Daemon::setOption("authorName", "Ali Hichem");
-        System_Daemon::setOption("authorEmail", "ali.hichem@mail.com");
-        System_Daemon::setOption("appPidLocation", APP_LOCATION . "/{$appName}/{$appName}.pid");
-        System_Daemon::setOption("logLocation", APP_LOCATION . "/{$appName}/{$appName}.log");
-        System_Daemon::setOption("usePEAR", FALSE);
-        System_Daemon::setOption("logVerbosity", System_Daemon::LOG_WARNING);
-        $this->appPidLocation = System_Daemon::opt('appPidLocation');
-        $this->socketAddress = APP_LOCATION . "/{$appName}/{$appName}.sock";
+        \System_Daemon::setOption("appName", "comet");
+        $appName = \System_Daemon::getOption("appName");
+        \System_Daemon::setOption("appDir", ROOT_COMET);
+        \System_Daemon::setOption("authorName", "Ali Hichem");
+        \System_Daemon::setOption("authorEmail", "ali.hichem@mail.com");
+        \System_Daemon::setOption("appPidLocation", ROOT_COMET . "/log/{$appName}/{$appName}.pid");
+        \System_Daemon::setOption("logLocation", ROOT_COMET . "/log/{$appName}/{$appName}.log");
+        \System_Daemon::setOption("usePEAR", FALSE);
+        \System_Daemon::setOption("logVerbosity", \System_Daemon::LOG_WARNING);
+        $this->appPidLocation = \System_Daemon::opt('appPidLocation');
+        $this->socketAddress = ROOT_COMET . "/log/{$appName}/{$appName}.sock";
     }
 
     /**
@@ -116,7 +120,7 @@ class CometServer
         {
             echo CometCliColor::format('KO', 'ERROR') . "]\n";
             $this->printMessage(socket_strerror(socket_last_error()) . " l[" . __LINE__ . "]");
-            System_Daemon::stop();
+            \System_Daemon::stop();
             exit;
         }
     }
@@ -131,7 +135,7 @@ class CometServer
         if (!socket_bind($this->socketServer, $this->socketAddress, $this->socketPort))
         {
             $this->printMessage(socket_strerror(socket_last_error()) . " l[" . __LINE__ . "]");
-            System_Daemon::stop();
+            \System_Daemon::stop();
             exit;
         }
         else
@@ -162,7 +166,7 @@ class CometServer
      */
     public function isRunning()
     {
-        $isRunning = System_Daemon::isRunning();
+        $isRunning = \System_Daemon::isRunning();
         if (!$isRunning && file_exists($this->socketAddress))
         {
             @unlink($this->socketAddress);
@@ -177,7 +181,7 @@ class CometServer
      */
     public function getServerPid()
     {
-        return System_Daemon::fileread($this->appPidLocation);
+        return \System_Daemon::fileread($this->appPidLocation);
     }
 
     /**
@@ -225,7 +229,7 @@ class CometServer
      */
     public function start()
     {
-        System_Daemon::start();
+        \System_Daemon::start();
         try
         {
             $this->initSocket();
@@ -276,7 +280,7 @@ class CometServer
         {
             echo socket_strerror(socket_last_error());
         }
-        System_Daemon::stop();
+        \System_Daemon::stop();
     }
 
     /**

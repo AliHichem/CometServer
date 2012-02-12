@@ -1,13 +1,15 @@
 <?php
 
+namespace Comet\Web;
+
 /**
- * CometWebJsHelper
+ * JsHelper
  *
  * @package     CometServer
  * @version     $Revision$
  * @author      Ali hichem <ali.hichem@mail.com>
  */
-class CometWebJsHelper
+class JsHelper
 {
 
     /**

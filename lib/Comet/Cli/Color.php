@@ -1,13 +1,15 @@
 <?php
 
+namespace Comet\Cli;
+
 /**
- * CometCliColor
+ * Color
  *
  * @package     CometServer
  * @version     $Revision$
  * @author      Ali hichem <ali.hichem@mail.com>
  */
-class CometCliColor
+class Color
 {
 
     protected
@@ -72,6 +74,14 @@ class CometCliColor
         return "\033[" . implode(';', $codes) . 'm' . $text . "\033[0m";
     }
 
+    /**
+     * format
+     * 
+     * @param string $text
+     * @param mixed $parameters
+     * 
+     * @return string 
+     */
     public static function format($text = '', $parameters = array())
     {
         $instance = new self();
