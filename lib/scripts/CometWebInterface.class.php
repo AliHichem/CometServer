@@ -4,7 +4,7 @@
  * CometWebInterface
  *
  * @package     CometServer
- * @version     $Revision$
+ * @version     1.0.0
  * @author      Ali hichem <ali.hichem@mail.com>
  */
 class CometWebInterface
