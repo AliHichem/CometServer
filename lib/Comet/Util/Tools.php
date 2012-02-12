@@ -6,7 +6,7 @@ namespace Comet\Util ;
  * Tools
  *
  * @package     CometServer
- * @version     $Revision$
+ * @version     2.0.0
  * @author      Ali hichem <ali.hichem@mail.com>
  */
 class Tools

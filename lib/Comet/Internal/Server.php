@@ -8,7 +8,7 @@ use Comet\Cli\Color as CometCliColor;
  * Server
  *
  * @package     CometServer
- * @version     $Revision$
+ * @version     2.0.0
  * @author      Ali hichem <ali.hichem@mail.com>
  */
 class Server
