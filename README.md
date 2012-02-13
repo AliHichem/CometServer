@@ -32,6 +32,10 @@ Installation
 download application
 
     $ git clone git://github.com/AliHichem/CometServer.git CometServer
+    
+install dependencies
+
+    $ git submodule update --init
 
 add execution to "Comet"
 
