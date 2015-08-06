@@ -60,7 +60,7 @@ web project:
 
     <?php require_once "path_to_lib_folder_of_cometserver/config/bootstrap.php"; ?>
 
-Exemples
+Examples
 -------
 
 There is already a good example under "examples" that demonstrate how to communicate with CometServer from your 
